@@ -12,5 +12,12 @@ function calculatePositions(list) {
 // 3. Set positions on the box
 
 function updatePositions(data) {
-  // 4. Ajax bit
+  $.ajax({
+    url: "http://localhost:3000/fruits/update_positions",
+    type: "POST",
+    data: data
+  });
 }
+
+
+
