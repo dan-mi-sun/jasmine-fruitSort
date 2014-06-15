@@ -3,7 +3,7 @@
 <div id="fruits">
   <ol>
     <% @fruits.each do |fruit| %>
-      <li>
+      <li id="<%= fruit.id %>">
         <%= render :partial => 'fruits/fruit', :locals => { :fruit => fruit } %>
       </li>
     <% end %>
