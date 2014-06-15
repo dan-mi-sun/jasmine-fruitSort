@@ -4,8 +4,15 @@ describe("Fruits", function() {
   var apple;
   var pear;
   var mango;
-
+  var expectedData = [
+    { "id": 75, position: 0}, 
+    { "id": 78, position: 1}, 
+    { "id": 92, position: 2}
+  ];
+  
   describe("calculatePositions", function() {
+    var result;
+
     beforeEach(function() {
       list = document.createElement("ol");
 
@@ -21,7 +28,7 @@ describe("Fruits", function() {
       mango.setAttribute("id", 92);
       list.appendChild(mango);
 
-      calculatePositions(list);
+      result = calculatePositions(list);
     });
 
     it("should set a data attribute position on each fruit", function() {
@@ -30,22 +37,24 @@ describe("Fruits", function() {
       expect(mango.getAttribute("data-position")).toBe('2');
     });
 
+    it("should return an array of id and position data", function() {
+      expect(result).toEqual(expectedData);
+    });
   });
 
   describe("updatePositions", function() {
     it("should send the right parameters to rails via AJAX", function() {
       spyOn($, "ajax");
 
-      var data = [{ id: 75, position: 0}, { id: 80, position: 1}];
-
-      updatePositions(data);
+      updatePositions(expectedData);
 
       var lastRequest = $.ajax.mostRecentCall.args[0];
       var url = "http://localhost:3000/fruits/update_positions";
       expect(lastRequest.url).toEqual(url);
       expect(lastRequest.type).toEqual("POST");
-      expect(lastRequest.data).toEqual(data);
-    });
+      expect(lastRequest.data).toEqual(JSON.stringify({ fruits: expectedData }));
+      expect(lastRequest.contentType).toEqual('application/json')
+    })
   });
 
 });
