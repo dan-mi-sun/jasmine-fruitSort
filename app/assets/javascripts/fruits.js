@@ -15,3 +15,14 @@ function calculatePositions(list) {
   return positions;
 }
 // 3. Set positions on the box
+
+
+
+function updatePositions(expectedData) {
+  $.ajax({
+    type: "POST",
+    url: "http://localhost:3000/fruits/update_positions",
+    data: JSON.stringify({ fruits: expectedData }),
+    contentType: 'application/json'
+  });
+};
