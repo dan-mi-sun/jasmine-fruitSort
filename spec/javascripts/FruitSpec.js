@@ -28,6 +28,7 @@ describe("Fruits", function() {
       mango.setAttribute("id", 92);
       list.appendChild(mango);
 
+      console.log(list);
       result = calculatePositions(list);
     });
 
