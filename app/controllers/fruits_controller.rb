@@ -69,6 +69,14 @@ class FruitsController < ApplicationController
     end
   end
 
+  def update_positions
+
+    @fruits = Fruti.all
+    positions = params[:fruits]
+
+    
+  end
+
   # DELETE /fruits/1
   # DELETE /fruits/1.json
   def destroy
